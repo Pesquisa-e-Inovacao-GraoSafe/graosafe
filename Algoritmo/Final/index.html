@@ -1,19 +1,33 @@
 <!DOCTYPE html>
 
-    <html lang="pt-br">
+<html lang="pt-br">
 
     <head>
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home GrãoSafe</title>
+        <title>Calculadora GrãoSafe</title>
 
     </head>
 
     <body>
 
-        <!-- Código vai aqui -->
+        Digite o nome da sua Empresa:
+        <input type="text" id="input_nome"> <br> <br>
+
+        Digite a UF do estado onde se concentra sua produção:
+        <input type="text" id="input_uf" placeholder="MS/PR/MT"> <br> <br>
+
+        Digite a quantidade de hectares da sua produção:
+        <input type="text" id="input_hectare"> <br> <br>
+
+        Digite o valor por saca de soja atual:
+        <input type="text" id="input_saca"> <br> <br>
+
+        <button onclick="analise()">Analise de Safra</button><br> <br>
     
+        <div id="div_mensagem"></div>
+
     </body>
 
 </html>
