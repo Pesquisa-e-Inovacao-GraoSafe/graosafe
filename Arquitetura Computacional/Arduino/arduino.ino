@@ -1,21 +1,38 @@
-const int PINO_ SENSOR_TEMPERATURA - A0; // declarando varíavel constante controlador da temperatura na porta analógica 0
+const int PINO_SENSOR_TEMPERATURA = A0; // definição da variável para recebimento dos dados da porta analógica A0
+float temperaturaCelsius; // criação de variável do tipo float ( aceitar valores decimais ) para alocar a temperatura futuramente.
 
-float temperaturaCelsius; // declaração de variável de temperatura para futuras referencias dentro do código
+void setup(){ // função inicialiada junto do programa, vai rodar só uma vez
 
-void setup() { // void setup é tudo o que é executado pós inicialização do programa, de forma única.
+  Serial.begin(9600); // inicialização do arduino
 
-    Serial.begin(9600); // inicialização do arduino com a máquina, necessária pré
 }
 
+void loop() { // função que vai se repetir enquanto o código se manter aberto
 
-void 100p() { // laço de repetição infinito
-    int valorleitura = analogRead(PINO_SENSOR_TEMPERATURA); // atribui o valor da leitura analógica capturada no sensor da porta A na variável valorLeitura, declarada no início do código.
+  int valorLeitura = analogRead(PINO_SENSOR_TEMPERATURA); // leitura dos dados da porta analógica A0 definida no começo do código
+  temperaturaCelsius = (valorLeitura * 5.0 / 1023.0) / 0.01; // conversão dos dados recebidos pela leitura, com a conversão em °C.
+  int tempMaxima = 30; // valor fixo de temperatura máxima que o grão pode atingir enquanto se mantém saudável.
+  int tempMinima = 20; // valor fixo da temperatura mínima que o grão pode atingir enquanto se mantém saudável.
+  int tempIdeal = 25; // valor ideal da temperatura para maior eficiência do grão.
+  if(temperaturaCelsius >= 23){ // bloco de estrutura de decisão, onde se a temperatura estiver entre 23 e 25, adiciona um
+    if(temperaturaCelsius < 25){
+      temperaturaCelsius += 1;
+    } else if(temperaturaCelsius <= 27){ // se a temperatura estiver entre 25 e 27, diminui um
+    temperaturaCelsius -= 1;
+    }; 
+  } // intuíto de deixar os valores o mais próximo o possível do valro ideal
+  Serial.print("Temp_Atual:"); // nome da label - síntaxe - ("NomeTaltaltal:" ) o : é obrigatório
+  Serial.print(temperaturaCelsius); // registro do valor da label Temp_Atual
+  Serial.print(","); // vírgula pra separação das labels e valores
+  Serial.print("Temp_Ideal:"); // label 2
+  Serial.print(tempIdeal);
+  Serial.print(",");
+  Serial.print("Temp_Maxima:"); // label 3
+  Serial.print(tempMaxima);
+  Serial.print(",");
+  Serial.print("Temp_Minima:"); // label 4
+  Serial.println(tempMinima);
 
-    temperaturacelsius = (valorLeitura * 5.0 / 1023.0) / 0.01; // cálculo para conversão da tensão elétrica recebida pelo sensor, e transformação em célsius
+  delay(500); // delay de 500ms, ou 0.5 segundos, para a repetição da estrutura loop.
 
-    Serial-print("Temperatura: "); // exibir a string Temperatura:
-    Serial print(temperaturaCelsius); // exibir na mesma linha acima o valor da
-                                    //variável capturado em valorLeitura, e convertido em °C na variável temperaturaCelsius.
-Serial println(" C"); // concluindo a concatenação dos três prints seriais.
-delay(2000): // delay de 2000ms, ou 2 segundos, para a repetição do void loop
-();
+}
