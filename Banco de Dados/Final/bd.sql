@@ -16,3 +16,13 @@ rua VARCHAR(100) not null,
 bairro VARCHAR(20) not null,
 cidade VARCHAR(50) not null,
 cep int not null);
+
+CREATE TABLE sensorLM35(
+idSensor int primary key auto_increment not null,
+numSerie VARCHAR(100) unique,
+dtFabricacao date not null,
+dtCompra datetime not null,
+statusManutencao VARCHAR(20) not null,
+CONSTRAINT checkManutencao CHECK(statusManutencao IN("Ativo","Inativo","Manutencao")),
+dtManutencao datetime not null
+);
