@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira de Soja</title>
+</head>
+<body>
+    
+<h1>Calculadora Financeira de Soja</h1>
+
+<h3>Simulador de Economia no Armazenamento de Soja</h3>
+
+Insira a quantidade (toneladas) de soja armazenada em Silo:
+<input id="qtd_soja" type="text">
+
+<br><br>
+
+Insira o valor do dia da saca de soja:
+<input id="valor_dia_saca" type="text">
+
+<br><br>
+
+<button onclick="simulareconomia()"> Simular Economia</button>
+
+<br><br>
+
+<div id="div_mensagem"></div>
+
+</body>
+</html>
+
+<script> function simulareconomia() {
+
+var valorsaca = Number(valor_dia_saca.value) // valor do dia da saca de soja
+var pesosaca = 60; // peso de cada saca em kg (60)
+var perdabrasil = 0.15; // 15% da soja é perdida normalmente no Brasil
+var reducaoperda = 0.075; // proposta da solução de monitoramento (estimativa de redução de 7,5% de perda da safra)
+
+var sojatoneladas = (qtd_soja.value)
+
+var sojasacas = (sojatoneladas * 1000 / pesosaca)
+
+var valorsoja = (sojasacas * valorsaca)
+
+var perdasemsolucao = (valorsoja * perdabrasil)
+
+var perdacomsolucao = (valorsoja * reducaoperda)
+
+div_mensagem.innerHTML = `Quantidade de soja armazenada: ${sojatoneladas} toneladas.<br><br>
+                Valor total da soja armazenada: R$ ${valorsoja.toFixed(2)}.<br><br>
+                Valor perdido sem a solução de monitoramento: R$ ${perdasemsolucao.toFixed(2)}.<br><br>
+                Valor de economia com a solução de monitoramento (estimativa de redução de 7,5%): R$ ${perdacomsolucao.toFixed(2)}.<br><br>
+                Você economiza R$ ${(perdasemsolucao - perdacomsolucao).toFixed(2)} com a solução de monitoramento.`;
+}
+
+</script>
