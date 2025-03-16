@@ -73,9 +73,18 @@
 
         var valorTotal = ganhoHectare - perdaCorrigida;
 
+        div_mensagem.innerHTML = ` A empresa ${nomeEmpresa} com a sua produção de um total de ${qtdHectare} hectares, com sua produção concentrado em ${uf}. <br> 
+    Atualmente a saca de grão de soja vale R$${valorSaca}, dado que em média uma saca de soja pesa 60Kg, pela Conab (Companhia Nacional de Abastecimento), por hectare é produzido cerca de 3200kg. <br> <br>
 
+    A perda média de grãos por mal armazenamento em ${uf} tem um valor médio de ${porcentagem}. <br>
+    No total a empresa ${nomeEmpresa} ganha, em média, cerca de R$${ganhoEmpresa} reais hoje em sua produção, já com perdas pelo mal armazenamento. <br> <br>
 
+    Dado os valores a empresa ${nomeEmpresa}, terá uma perda de R$${perdaReal} em sua produção. <br> <br>
+    
+    Já com a nossa solução ao invés de ${porcentagem}, estima-se diminuir essa perda em até 8%. <br>
+    Com a soluçao a empresa ${nomeEmpresa}, terá uma perda de R$${perdaCorrigida} em sua produção. <br> <br>
+    Aumentando o lucro da produção de R$${ganhoEmpresa}, para: R$${valorTotal}!`
 
+}
 
-    }
 </script>
