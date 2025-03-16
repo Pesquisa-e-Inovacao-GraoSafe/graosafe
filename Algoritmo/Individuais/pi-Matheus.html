@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoramento do Grão de Soja em Silos</title>
+</head>
+<body>
+    <h1>Calculadora Financeira</h1>
+
+    <h3>Nome da empresa: </h3>
+    <input type="text" id="input_nomeEmpresa" placeholder="SPTech"><br>
+    <h3>Quantidade de Hectares no terreno</h3>
+    <input type="number" id="input_qtdTerreno" placeholder = "100">
+    <h3>Quantidade de Hectares destinados a Soja</h3>
+    <input type="number" id="input_qtdHectares" placeholder="100"><br>
+    <h3>Quantidade de Soja colhida (toneladas)</h3>
+    <input type="number" id="input_qtdSoja" placeholder="100"><br>
+    <h3>Valor da tonelada de soja</h3>
+    <input type="number" id="input_valorSoja" placeholder="1500">
+
+    <button onClick = "Economia()">Economizar com a SPTech!</button>
+    <div id="div_msgFinal"></div>
+</body>
+</html>
+
+<script>;
+    function Economia(){
+        div_msgFinal.innerHTML = "";
+        var nomeEmpresa = input_nomeEmpresa.value;
+        var qtdHectares = Number(input_qtdHectares.value);
+        var qtdSoja = Number(input_qtdSoja.value);
+        var qtdTerreno = Number(input_qtdTerreno.value);
+        if (qtdHectares > qtdTerreno){
+            qtdHectares = qtdTerreno;
+        div_msgFinal.innerHTML = `Você inseriu um valor da quantidade de hectares destinados a soja maior que o do terreno. Ajustando quantia de hectares para soja = tamanho do terreno.<br><br>`
+        }
+        var precoSoja = Number(input_valorSoja.value);
+        var colheitaHec = qtdSoja / qtdHectares
+        var totalTerreno = (qtdHectares / qtdTerreno) * 100
+        var valorTotal = qtdSoja * precoSoja
+        var sojaHectar = qtdSoja / qtdHectares;
+
+
+        div_msgFinal.innerHTML +=
+        `Olá, ${nomeEmpresa}!<br>
+        1 Hectar = 10000m²<br>
+        Área do terreno: ${qtdTerreno * 10000}m².<br>
+        Área destinada a plantio: ${qtdHectares * 10000}m²<br>
+        O seu terreno tem ${totalTerreno}% de área destinada ao cultivo de grãos.<br>
+        Toneladas de soja por hectar: ${sojaHectar}<br>
+        Valor atual da soja: R$${precoSoja}<br>
+        Arrecadamento: R$${valorTotal}<br>
+        Economia com o SPTech!: R$${valorTotal * 0.05}<br>
+        `
+
+    }
+</script>
