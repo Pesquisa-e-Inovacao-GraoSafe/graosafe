@@ -61,3 +61,23 @@ VALUES
 (1, 1, 1, '2025-03-05 10:00:00'),
 (2, 2, 2, '2025-03-06 12:30:00'),
 (3, 3, 3, '2025-03-07 14:00:00');
+
+INSERT INTO temperatura (idSensor, idCliente, temperatura) VALUES
+	(1, 1, 24.5),
+    (2, 2, 29),
+    (3, 3, 35);
+    
+SELECT
+idCliente as "Número de identificação da Empresa",
+razaoSocial as "Nome da Empresa",
+nomeFantasia as "Nome Fantasia",
+cnpj as "CNPJ",
+dtCadastro as "Data de Cadastro",
+email as "E-Mail",
+senha as "Senha",
+CONCAT("+", telefone) as "Telefone (XXYYZZZZZZZZZ)",
+UF as "Unidade Federativa",
+rua as "Rua",
+bairro as "Bairro",
+cidade as "Cidade",
+cep as "CEP" FROM Cliente;
