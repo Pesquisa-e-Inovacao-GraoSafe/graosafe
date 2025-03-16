@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora financeira</title>
+</head>
+<body>
+    <h1>Calculadora financeira - GrãoSafe </h1>
+    Nome da sua empresa: <input type="text" id="inputEmpresa" placeholder="GrãoSafe">
+    <br>
+    <br>
+
+    Quantas toneladas de soja seu silo comporta? <input type="number" id="inputTonelada" placeholder="1">
+    <br>
+    <br>
+
+    Qual o valor médio da tonelada da soja? <input type="number" id="inputValor" placeholder="1500">
+    <br>
+    <br>
+
+    Quantos silos você possui? <input type="text" id="inputSilos" placeholder="2">
+    <br>
+    <br>
+    
+    <button onclick="Calcular()">Ver economia!</button>
+    <br>
+    <div id="divResposta"></div>
+</body>
+</html>
+
+<script>
+
+    function Calcular(){
+        var empresa = inputEmpresa.value;
+        var qtdSilos = Number(inputSilos.value);
+        var tonelada = Number(inputTonelada.value);
+        var valorMedio = Number(inputValor.value);
+
+        var perdaFinanceira = ((tonelada * 0.15) * valorMedio) * qtdSilos; 
+
+        divResposta.innerHTML = `Segundo uma pesquisa divulgada pela CONAB em 2023, cerca de 15% da safra é perdida devido a condições de armazenamento. Na empresa ${empresa} o valor médio da soja se totaliza ${valorMedio},  nesse caso totalizando uma perda financeira anual média de <b>R$ ${perdaFinanceira.toFixed(2) * 12}</b>. <br><br>
+        Instalando o sensor de temperatura em todos os seus silos o investimento anual seria de apenas R$ ${150 * qtdSilos}. 
+        <br> Uma vez instalado, o monitoramento será feito em tempo real, gerando insights valiosos para tomada de decisão.` 
+    }
+</script>
