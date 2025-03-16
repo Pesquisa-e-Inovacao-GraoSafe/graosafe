@@ -26,3 +26,10 @@ statusManutencao VARCHAR(20) not null,
 CONSTRAINT checkManutencao CHECK(statusManutencao IN("Ativo","Inativo","Manutencao")),
 dtManutencao datetime not null
 );
+
+CREATE TABLE silo(
+idSilo int not null primary key,
+idCliente int not null,  -- não é primary key porque uma empresa pode ter vários silos e/ou vários equipamentos
+dtInstalacao datetime not null, -- date time pra ver horário de tudo
+idSensor int not null);
+
