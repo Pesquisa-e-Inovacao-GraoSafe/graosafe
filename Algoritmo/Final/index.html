@@ -47,5 +47,35 @@
         var perdaCorrigida = 0;
         var ganhoHectare =  0;
         var perdaReal = 0;
+
+        if (uf == "MT") {
+            var porcentagem = "12,4%";
+            var mt = 0.124; // Exemplo de definição da variável mt
+            ganhoHectare = ((3200 / 60) * valorSaca) * qtdHectare;
+            perdaReal = ganhoHectare * mt;
+            ganhoEmpresa = ganhoHectare - perdaReal;
+            perdaCorrigida = ganhoHectare * 0.044;
+        } else if (uf == "MS") {
+            var porcentagem = "17,5%";
+            var mtsul = 0.175; // Exemplo de definição da variável mtsul
+            ganhoHectare = ((3200 / 60) * valorSaca) * qtdHectare;
+            perdaReal = ganhoHectare * mtsul;
+            ganhoEmpresa = ganhoHectare - perdaReal;
+            perdaCorrigida = ganhoHectare * 0.095;
+        } else {
+            var porcentagem = "11,4%";
+            var pr = 0.114; // Exemplo de definição da variável pr
+            ganhoHectare = ((3200 / 60) * valorSaca) * qtdHectare;
+            perdaReal = ganhoHectare * pr;
+            ganhoEmpresa = ganhoHectare - perdaReal;
+            perdaCorrigida = ganhoHectare * 0.034;
+        }
+
+        var valorTotal = ganhoHectare - perdaCorrigida;
+
+
+
+
+
     }
 </script>
