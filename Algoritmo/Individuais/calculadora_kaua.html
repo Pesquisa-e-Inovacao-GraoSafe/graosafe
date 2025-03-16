@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Financeiro</title>
+</head>
+<body>
+     
+    <h1>Perdas na armazenagem de grãos de soja</h1>
+
+    Insira o nome da empresa:
+    <input type="text" id="input_nome">
+    <br><br>
+
+    Insira o tipo de silo:
+    <input type="text" id="input_silo">
+    <br><br>
+
+    Insira o tamanho do silo:
+    <input type="text" id="input_tamanho">
+    <br><br>
+
+    insira a quantidade de grãos no silo:
+    <input type="number" id="input_qtd">
+    <br><br>    
+
+    Insira a temperatura do silo:
+    <input type="number" id="input_temperatura">
+    <br><br>
+
+    <button onclick="calcular()">Calcular Custos</button>
+
+    <div id="div_msg"></div>
+
+</body>
+</html>
+<script>
+   
+   function calcular(){
+        var empresa = input_nome.value;
+        var silo = input_silo.value;
+        var tamanho = input_tamanho.value;
+        var temperatura = Number (input_temperatura.value);
+        var qtd = Number (input_qtd.value);
+        var perda = 15/100;
+
+        var perda1 = qtd * perda;
+        var preco = perda1 / 60 * 132.37;
+
+        if (temperatura <=20){
+            div_msg.innerHTML = `<br>A ${empresa} com um silo do tipo ${silo} na temperatura de ${temperatura}°C tem uma perda de ${perda1}KG devido a temperatura irregular.<br>
+            Com uma perda em reais de R$${preco}.`;
+        }
+        if (temperaura >= 30){
+            div_msg.innerHTML =`<br>A ${empresa} com um silo do tipo ${silo} na temperatura de ${temperatura}°C tem uma perda de ${perda1}KG devido a temperatura irregular.<br>
+            Com uma perda em reais de R$${preco}.`;
+        }
+
+    }
+
+</script>
