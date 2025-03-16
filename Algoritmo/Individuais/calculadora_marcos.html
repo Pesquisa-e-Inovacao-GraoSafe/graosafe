@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    <label for="input_toneladas">Qual a quantidade de toneladas armazenada?</label>
+    <input type="text" id="input_toneladas" placeholder="Toneladas">
+    <br>
+    <br>
+    <label for="input_cotacao">Quanto está o valor da saca atualmente?</label>
+    <input type="text" id="input_cotacao" placeholder="R$">
+    <br>
+    <br>
+    <button onclick="calcular()">Calcular</button>
+    <br>
+    <br>
+    <div id="div_mensagem"></div>
+
+    <script>
+
+        function calcular(){
+
+            var armazenamento = Number(input_toneladas.value)
+            var tonelada_em_quilo = 1000
+            var armazenamento_em_quilo = armazenamento * tonelada_em_quilo
+            var saca_em_quilo = 60
+            var cotacao = Number(input_cotacao.value)
+            var faturamento = (cotacao * (armazenamento_em_quilo / saca_em_quilo))
+            var perda_media = faturamento * 0.15
+
+            div_mensagem.innerHTML = `O total do seu armazenamento é de ${armazenamento_em_quilo} Kg. <br> 
+                                    Levando em consideração que o peso da saca é de 60 Kg, sua produção é de ${armazenamento_em_quilo / saca_em_quilo} sacas. <br> 
+                                    Você tem um faturamento médio de R$ ${faturamento}. <br>
+                                    A perda média nos últimos 20 anos foi de 15% por mal armazenamento dos grãos de soja resultando o valor de R$ ${perda_media}. <br>
+                                    Você faturaria R$ ${faturamento} porém passa a faturar R$ ${faturamento - perda_media}. <br>
+                                    Vamos melhorar nisso juntos?`
+
+        }
+
+    </script>
+
+
+    
+</body>
+
+</html>
