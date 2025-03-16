@@ -1,36 +1,34 @@
+
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> Calculadora Financeira - Grão Safe</h1> <br>
+    <h3> Calcule aqui a estimativa de perda de sua produção de grãos de soja por mal armazenamento:</h3> <br>
 
-<html lang="pt-br">
+    Digite o nome da sua Empresa:
+    <input type="text" id="input_nome"> <br> <br>
 
-    <head>
+    Digite a UF do estado onde se concentra sua produção:
+    <input type="text" id="input_uf" placeholder="MS/PR/MT"> <br> <br>
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Calculadora GrãoSafe</title>
+    Digite a quantidade de toneladas armazenado em seus silos:
+    <input type="text" id="input_toneladas"> <br> <br>
 
-    </head>
+    Digite a cotação da saca de soja atual:
+    <input type="text" id="input_saca"> <br> <br>
 
-    <body>
+    <button onclick="analisePerda()">Analise de Safra</button><br> <br>
 
-        Digite o nome da sua Empresa:
-        <input type="text" id="input_nome"> <br> <br>
-
-        Digite a UF do estado onde se concentra sua produção:
-        <input type="text" id="input_uf" placeholder="MS/PR/MT"> <br> <br>
-
-        Digite a quantidade de hectares da sua produção:
-        <input type="text" id="input_hectare"> <br> <br>
-
-        Digite o valor por saca de soja atual:
-        <input type="text" id="input_saca"> <br> <br>
-
-        <button onclick="analise()">Analise de Safra</button><br> <br>
     
-        <div id="div_mensagem"></div>
-
-    </body>
-
+    <div id="div_mensagem"></div>
+</body>
 </html>
+
 <script>
 
     function analise(){
