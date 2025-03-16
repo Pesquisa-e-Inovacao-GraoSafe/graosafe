@@ -49,3 +49,15 @@ VALUES
 ('Mercado Donuts', 'Empresa ABC', 12345678000195, '2025-03-01', 'empresaabc@gmail.com', 'senha123', 5511987654321, 'SP', 'Rua A', 'Bairro X', 'São Paulo', 12345678),
 ('MGTech', 'Tech Solutions', 98765432000100, '2025-02-15', 'techsolutions@hotmail.com', 'senha456', 5511976543210, 'RJ', 'Rua B', 'Bairro Y', 'Rio de Janeiro', 87654321),
 ('Logitecnica', 'Logistica LTDA', 19283746500010, '2025-01-30', 'logistica.ltda@outlook.com', 'senha789', 5511965432109, 'MG', 'Rua C', 'Bairro Z', 'Belo Horizonte', 23456789);
+
+INSERT INTO sensorLM35 (numSerie, dtFabricacao, dtCompra, dtManutencao, statusManutencao)
+VALUES
+('9AKREG935G9', '2023-06-10', '2024-07-15 10:00:00', '2025-03-05 14:30:00', 'Ativo'),
+('SAF4290KF29', '2023-11-20', '2024-01-10 09:00:00', '2025-02-25 16:45:00', 'Inativo'),
+('ASDKF94K9F2', '2023-03-05', '2024-03-10 13:00:00', '2025-02-28 11:00:00', 'Inativo');
+
+INSERT INTO silo (idSilo, idCliente, idSensor, dtInstalacao)
+VALUES
+(1, 1, 1, '2025-03-05 10:00:00'),
+(2, 2, 2, '2025-03-06 12:30:00'),
+(3, 3, 3, '2025-03-07 14:00:00');
