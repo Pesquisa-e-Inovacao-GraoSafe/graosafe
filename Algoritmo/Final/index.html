@@ -1,36 +1,34 @@
+
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> Calculadora Financeira - Grão Safe</h1> <br>
+    <h3> Calcule aqui a estimativa de perda de sua produção de grãos de soja por mal armazenamento:</h3> <br>
 
-<html lang="pt-br">
+    Digite o nome da sua Empresa:
+    <input type="text" id="input_nome"> <br> <br>
 
-    <head>
+    Digite a UF do estado onde se concentra sua produção:
+    <input type="text" id="input_uf" placeholder="MS/PR/MT"> <br> <br>
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Calculadora GrãoSafe</title>
+    Digite a quantidade de toneladas armazenado em seus silos:
+    <input type="text" id="input_toneladas"> <br> <br>
 
-    </head>
+    Digite a cotação da saca de soja atual:
+    <input type="text" id="input_saca"> <br> <br>
 
-    <body>
+    <button onclick="analisePerda()">Analise de Safra</button><br> <br>
 
-        Digite o nome da sua Empresa:
-        <input type="text" id="input_nome"> <br> <br>
-
-        Digite a UF do estado onde se concentra sua produção:
-        <input type="text" id="input_uf" placeholder="MS/PR/MT"> <br> <br>
-
-        Digite a quantidade de hectares da sua produção:
-        <input type="text" id="input_hectare"> <br> <br>
-
-        Digite o valor por saca de soja atual:
-        <input type="text" id="input_saca"> <br> <br>
-
-        <button onclick="analise()">Analise de Safra</button><br> <br>
     
-        <div id="div_mensagem"></div>
-
-    </body>
-
+    <div id="div_mensagem"></div>
+</body>
 </html>
+
 <script>
 
     function analise(){
@@ -47,5 +45,44 @@
         var perdaCorrigida = 0;
         var ganhoHectare =  0;
         var perdaReal = 0;
-    }
+
+        if (uf == "MT") {
+            var porcentagem = "12,4%";
+            var mt = 0.124; // Exemplo de definição da variável mt
+            ganhoHectare = ((3200 / 60) * valorSaca) * qtdHectare;
+            perdaReal = ganhoHectare * mt;
+            ganhoEmpresa = ganhoHectare - perdaReal;
+            perdaCorrigida = ganhoHectare * 0.044;
+        } else if (uf == "MS") {
+            var porcentagem = "17,5%";
+            var mtsul = 0.175; // Exemplo de definição da variável mtsul
+            ganhoHectare = ((3200 / 60) * valorSaca) * qtdHectare;
+            perdaReal = ganhoHectare * mtsul;
+            ganhoEmpresa = ganhoHectare - perdaReal;
+            perdaCorrigida = ganhoHectare * 0.095;
+        } else {
+            var porcentagem = "11,4%";
+            var pr = 0.114; // Exemplo de definição da variável pr
+            ganhoHectare = ((3200 / 60) * valorSaca) * qtdHectare;
+            perdaReal = ganhoHectare * pr;
+            ganhoEmpresa = ganhoHectare - perdaReal;
+            perdaCorrigida = ganhoHectare * 0.034;
+        }
+
+        var valorTotal = ganhoHectare - perdaCorrigida;
+
+        div_mensagem.innerHTML = ` A empresa ${nomeEmpresa} com a sua produção de um total de ${qtdHectare} hectares, com sua produção concentrado em ${uf}. <br> 
+    Atualmente a saca de grão de soja vale R$${valorSaca}, dado que em média uma saca de soja pesa 60Kg, pela Conab (Companhia Nacional de Abastecimento), por hectare é produzido cerca de 3200kg. <br> <br>
+
+    A perda média de grãos por mal armazenamento em ${uf} tem um valor médio de ${porcentagem}. <br>
+    No total a empresa ${nomeEmpresa} ganha, em média, cerca de R$${ganhoEmpresa} reais hoje em sua produção, já com perdas pelo mal armazenamento. <br> <br>
+
+    Dado os valores a empresa ${nomeEmpresa}, terá uma perda de R$${perdaReal} em sua produção. <br> <br>
+    
+    Já com a nossa solução ao invés de ${porcentagem}, estima-se diminuir essa perda em até 8%. <br>
+    Com a soluçao a empresa ${nomeEmpresa}, terá uma perda de R$${perdaCorrigida} em sua produção. <br> <br>
+    Aumentando o lucro da produção de R$${ganhoEmpresa}, para: R$${valorTotal}!`
+
+}
+
 </script>

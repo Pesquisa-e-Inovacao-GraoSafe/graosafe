@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Financeiro</title> 
+</head>
+<body>
+
+    <h2>Calculadora Fincanceira:</h2>
+    <!--A perda de safra projetada dentro do silos de soja é de 20% sem o monitoramento de temperatura. A minha solução traz essa comparação entre a perda com o monitoramento de temperatura(avaliada em 10%) e sem o monitoramento e outras análises.-->
+        Insira a quantidade de soja armazenada em toneladas:
+        <br>
+        <input type="text" id="input_qtdSoja">
+        <br>
+        <br>
+        Insira o preço de venda de 1 tonelada de soja:
+        <br>
+        <input type="text" id="input_venda">
+        <br>
+        <button onclick="calcularSolucao()">Calcular projeção de lucro</button><br><br>
+        <div id="div_mensagem"></div>
+        
+    <script>
+        function calcularSolucao(){
+            var quantidade = Number(input_qtdSoja.value);
+            var preco = Number(input_venda.value);
+            var solucao = (quantidade * preco) * 0.1;
+            var perda = (quantidade * preco) * 0.2;
+            var lucroCom = quantidade * preco - solucao; // 1 * 1000 - 100 = 900
+            var lucroSem= quantidade * preco - perda; // 1 * 1000 - 200 = 800
+            // 800 - 900
+
+            div_mensagem.innerHTML = `Sem a solução - Arrecadamento = RS${quantidade*preco} <br> Perda = RS${perda}<br> Projeção de lucro =R$${lucroSem}<br><br>
+            Com a solução - Arrecadamento: = R$${quantidade * preco}<br> Perda = R$${solucao}<br> Projeção de lucro = R$${lucroCom}<br><br>Conforme analisado, é visto que com o monitoramento de temperatura dentro do silo, temos uma redução de R$${lucroCom-lucroSem} no prejuízo`;
+
+        }
+        
+
+            
+    </script>
+</body>
+</html>
