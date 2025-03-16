@@ -40,3 +40,12 @@ CREATE TABLE temperatura(
     temperatura float(5,2) not null,
     dtRegistro datetime default current_timestamp
 );
+
+ALTER TABLE Cliente ADD CONSTRAINT checkCnpj CHECK (LENGTH(cnpj) = 14);
+ALTER TABLE Cliente ADD CONSTRAINT checkTelefone CHECK (LENGTH(telefone) <= 14 and LENGTH(telefone) >= 12);
+ALTER TABLE Cliente ADD CONSTRAINT checkCep CHECK (LENGTH(cep) = 8);
+INSERT INTO Cliente (razaoSocial, nomeFantasia, cnpj, dtCadastro, email, senha, telefone, UF, rua, bairro, cidade, cep)
+VALUES
+('Mercado Donuts', 'Empresa ABC', 12345678000195, '2025-03-01', 'empresaabc@gmail.com', 'senha123', 5511987654321, 'SP', 'Rua A', 'Bairro X', 'São Paulo', 12345678),
+('MGTech', 'Tech Solutions', 98765432000100, '2025-02-15', 'techsolutions@hotmail.com', 'senha456', 5511976543210, 'RJ', 'Rua B', 'Bairro Y', 'Rio de Janeiro', 87654321),
+('Logitecnica', 'Logistica LTDA', 19283746500010, '2025-01-30', 'logistica.ltda@outlook.com', 'senha789', 5511965432109, 'MG', 'Rua C', 'Bairro Z', 'Belo Horizonte', 23456789);
