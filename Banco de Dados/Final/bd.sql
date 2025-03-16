@@ -33,3 +33,10 @@ idCliente int not null,  -- não é primary key porque uma empresa pode ter vár
 dtInstalacao datetime not null, -- date time pra ver horário de tudo
 idSensor int not null);
 
+CREATE TABLE temperatura(
+	idTemperatura int primary key auto_increment,
+    idSensor int not null unique,
+    idCliente int not null,
+    temperatura float(5,2) not null,
+    dtRegistro datetime default current_timestamp
+);
