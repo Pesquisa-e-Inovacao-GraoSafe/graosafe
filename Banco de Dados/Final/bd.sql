@@ -22,14 +22,14 @@ idSensor INT PRIMARY KEY AUTO_INCREMENT,
 numSerie VARCHAR(100) UNIQUE,
 dtFabricacao  DATETIME DEFAULT CURRENT_TIMESTAMP,
 dtCompra DATETIME,
-statusManutencao VARCHAR(10) NOT NULL,
-CONSTRAINT checkManutencao CHECK(statusManutencao IN("Ativo","Inativo","Manutencao")),
+statusSensor VARCHAR(10) DEFAULT "Inativo",
+CONSTRAINT checkManutencao CHECK(statusSensor IN("Ativo","Inativo","Manutencao")),
 dtManutencao DATETIME
 );
 
 CREATE TABLE silo(
 idSilo INT PRIMARY KEY AUTO_INCREMENT,
-idCliente INT NOT NULL,  -- não é primary key porque uma empresa pode ter vários silos e/ou vários equipamentos
+idCliente INT NOT NULL,  -- Não é unique porque uma empresa pode ter vários silos e/ou vários equipamentos
 dtInstalacao  DATETIME, 
 idSensor INT NOT NULL);
 
@@ -48,7 +48,7 @@ VALUES
 ('MGTech', 'Tech Solutions', 98765432000100, '2025-02-15', 'techsolutions@hotmail.com', 'senha456', 5511976543210, 'RJ', 'Rua B', 'Bairro Y', 'Rio de Janeiro', 87654321),
 ('Logitecnica', 'Logistica LTDA', 19283746500010, '2025-01-30', 'logistica.ltda@outlook.com', 'senha789', 5511965432109, 'MG', 'Rua C', 'Bairro Z', 'Belo Horizonte', 23456789);
 
-INSERT INTO sensorLM35 (numSerie, dtFabricacao, dtCompra, dtManutencao, statusManutencao)
+INSERT INTO sensorLM35 (numSerie, dtFabricacao, dtCompra, dtManutencao, statusSensor)
 VALUES
 ('9AKREG935G9', '2023-06-10', '2024-07-15 10:00:00', '2025-03-05 14:30:00', 'Ativo'),
 ('SAF4290KF29', '2023-11-20', '2024-01-10 09:00:00', '2025-02-25 16:45:00', 'Inativo'),
