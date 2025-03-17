@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador financeiro</title>
+</head>
+<body>
+    Nome da Empresa:
+    <input type="text" id="input_nomeEmpresa">    
+    <br><br>
+    
+    Inserir tamanho da fazenda (em hectares):
+    <input type="text" id="input_tamanho">
+    <br><br>
+
+    Inserir expectativa de produção total de sacas por hectare:
+    <input type="text" id="input_prodTotal">
+    <br><br>
+
+    Preço atual de venda da saca (60 kg) de soja: 
+    <input type="text" id="input_precoSaca">
+    <br><br>
+
+    Inserir cenário de riscos para efetuar simulação (Baixo, Intermediário, Alto):
+    <input type="text" id="input_risco">
+    <br><br>
+
+    <button onclick="simular()">Simular situação</button>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function simular() {
+        var nome = input_nomeEmpresa.value;
+        var cenario = input_risco.value;
+
+        /*
+    A escolha das variáveis de cálculo teve o intuito de ilustrar
+a prática de mercado.
+*/
+
+        var total_producao = Number(input_prodTotal.value);
+        var preco_atual_da_soja = Number(input_precoSaca.value);
+        var hectares = Number(input_tamanho.value);
+        var faturamentoEsperado = preco_atual_da_soja * total_producao * hectares;
+        
+/*  
+    A ideia é simular as perdas em diferentes cenários de mudanças climáticas,
+nas quais as porcentagens são baseadas no aplicativo ZARC da Embrapa.
+    O grupo espera a redução da perda em 7,5% em média, apoiado pelos estudos
+da CONAB, com o monitoramento de temperatura em silos de grãos de soja.
+*/
+        if (cenario == "Baixo") {
+            var valorFinal = faturamentoEsperado * 0.8;
+            var reducaoPerda = (faturamentoEsperado * 0.2) * 0.075
+        }
+        
+        if (cenario == "Intermediário") {
+            var valorFinal = faturamentoEsperado * 0.7;
+            var reducaoPerda = (faturamentoEsperado * 0.3) * 0.075
+        }
+        
+        if (cenario == "Alto") {
+            var valorFinal = faturamentoEsperado * 0.6;
+            var reducaoPerda = (faturamentoEsperado * 0.4) * 0.075
+        }
+
+/* Mostrar para a empresa que busca o monitoramento que será possível 
+recuperar determinado valor a depender do cenário de mudanças climáticas
+*/
+        div_mensagem.innerHTML = `
+        Com o monitoramento, em um cenário de Risco ${cenario}, será possível que a empresa ${nome} 
+        recupere R$${reducaoPerda}.    
+        `
+    }
+</script>
