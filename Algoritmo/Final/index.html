@@ -31,45 +31,28 @@
 
 <script>
 
-    function analise(){
-        var mtsul = 0.175;
-        var mt = 0.124;
-        var pr = 0.114;
+function analisePerda() {
+    var nomeEmpresa = input_nome.value; // Nome da empresa informado pelo usuário
+    var uf = input_uf.value; // Unidade federativa (estado) onde a empresa está localizada
+    var qtdToneladas = Number(input_toneladas.value); // Quantidade total de toneladas de soja armazenadas
+    var valorSaca = Number(input_saca.value); // Valor de uma saca de soja em reais
 
-        var nomeEmpresa = input_nome.value; //XXX
-        var uf =  input_uf.value; //ZZZ
-        var qtdHectare = Number (input_hectare.value); //YYY
-        var valorSaca = Number (input_saca.value); //VVV
+    var perda = 0.15; // Percentual de perda estimado devido ao armazenamento inadequado (15%)
+    var ganhoEmpresa = 0; // Variável para armazenar o ganho real da empresa após perda de 15%.
+    var ganhoTonelada = 0; // Variável para armazenar a receita bruta baseada na produção total antes das perdas.
+    var perdaReal = 0; // Valor real perdido devido ao armazenamento inadequado.
+    var perdaCorrigida = 0; // Valor da perda corrigida considerando a solução proposta.
+    var porcentagem = "15,0%"; // Representação textual da porcentagem de perda.
 
-        var ganhoEmpresa =  0;
-        var perdaCorrigida = 0;
-        var ganhoHectare =  0;
-        var perdaReal = 0;
+    var ganhoPorTonelada = ((1000 / 60) * valorSaca); // Cálculo de Receita por tonelada de soja produzida, utilizando o peso e valor da saca para o cálculo, será utilizada na mensagem!
+    ganhoTonelada = ((1000 / 60) * valorSaca) * qtdToneladas; // Cálculo da receita total antes das perdas, valor por tonelada multiplicado pela produção da empresa.
+   
+    perdaReal = (ganhoTonelada * perda); // Cálculo da perda real com base no percentual de 15%.
+    ganhoEmpresa = ganhoTonelada - perdaReal; // Cálculo da receita da empresa considerando a perda.
 
-        if (uf == "MT") {
-            var porcentagem = "12,4%";
-            var mt = 0.124; // Exemplo de definição da variável mt
-            ganhoHectare = ((3200 / 60) * valorSaca) * qtdHectare;
-            perdaReal = ganhoHectare * mt;
-            ganhoEmpresa = ganhoHectare - perdaReal;
-            perdaCorrigida = ganhoHectare * 0.044;
-        } else if (uf == "MS") {
-            var porcentagem = "17,5%";
-            var mtsul = 0.175; // Exemplo de definição da variável mtsul
-            ganhoHectare = ((3200 / 60) * valorSaca) * qtdHectare;
-            perdaReal = ganhoHectare * mtsul;
-            ganhoEmpresa = ganhoHectare - perdaReal;
-            perdaCorrigida = ganhoHectare * 0.095;
-        } else {
-            var porcentagem = "11,4%";
-            var pr = 0.114; // Exemplo de definição da variável pr
-            ganhoHectare = ((3200 / 60) * valorSaca) * qtdHectare;
-            perdaReal = ganhoHectare * pr;
-            ganhoEmpresa = ganhoHectare - perdaReal;
-            perdaCorrigida = ganhoHectare * 0.034;
-        }
+    perdaCorrigida = (ganhoTonelada * 0.075);  // Cálculo da perda corrigida considerando a estimativa proposta (redução para 7,5%)
+    var valorTotal = ganhoTonelada - perdaCorrigida; // Cálculo da receita final após a redução da perda.
 
-        var valorTotal = ganhoHectare - perdaCorrigida;
 
         div_mensagem.innerHTML = ` A empresa ${nomeEmpresa} com a sua produção de um total de ${qtdHectare} hectares, com sua produção concentrado em ${uf}. <br> 
     Atualmente a saca de grão de soja vale R$${valorSaca}, dado que em média uma saca de soja pesa 60Kg, pela Conab (Companhia Nacional de Abastecimento), por hectare é produzido cerca de 3200kg. <br> <br>
