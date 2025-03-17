@@ -121,3 +121,29 @@ INSERT INTO sensorLM35 (numSerie, dtFabricacao, dtCompra, statusManutencao, dtMa
 ('SN1122334455', '2024-01-20', '2024-03-10 09:15:00', 'Ativo', '2025-03-10 09:15:00'),
 ('SN5566778899', '2023-11-30', '2024-03-15 16:45:00', 'Manutencao', '2025-03-15 16:45:00'),
 ('SN6677889900', '2024-02-10', '2024-03-20 08:00:00', 'Ativo', '2025-03-20 08:00:00');
+
+DELETE FROM sensorLM35 WHERE idSensor BETWEEN 6 AND 8;
+
+UPDATE sensorLM35 SET statusManutencao = "Ativo" WHERE idSensor = 5;
+
+INSERT INTO silo (idSilo, idCliente, dtInstalacao, idSensor) VALUES
+(4, 4, '2024-04-01 08:00:00', 4),
+(5, 5, '2024-04-05 10:30:00', 5),
+(6, 6, '2024-04-10 14:00:00', 6),
+(7, 4, '2024-04-15 09:15:00', 4),
+(8, 5, '2024-04-20 16:45:00', 5),
+(9, 6, '2024-04-25 08:00:00', 6);
+
+INSERT INTO temperatura (idSensor, idCliente, temperatura, dtRegistro) VALUES
+(4, 4, 28, '2025-03-01 08:30:00'),
+(5, 5, 30, '2025-03-02 09:45:00'),
+(6, 6, 27, '2025-03-03 14:20:00'),
+(1, 1, 29, '2025-03-04 10:10:00'),
+(2, 2, 31, '2025-03-05 16:50:00'),
+(3, 3, 26, '2025-03-06 08:05:00');
+
+INSERT INTO sensorLM35 (idSensor, numSerie, dtFabricacao, dtCompra, statusManutencao, dtManutencao) VALUES
+(6, 'SN5678901234', '2024-02-01', '2024-03-01 14:00:00', 'Inativo', '2025-03-01 14:00:00'),
+(7, 'SN1122334455', '2024-01-20', '2024-03-10 09:15:00', 'Ativo', '2025-03-10 09:15:00'),
+(8, 'SN5566778899', '2023-11-30', '2024-03-15 16:45:00', 'Manutencao', '2025-03-15 16:45:00');
+
