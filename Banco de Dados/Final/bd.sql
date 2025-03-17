@@ -81,3 +81,17 @@ rua as "Rua",
 bairro as "Bairro",
 cidade as "Cidade",
 cep as "CEP" FROM Cliente;
+
+SELECT 
+idSensor as 'Identificação do Sensor',
+numSerie as 'Número de série',
+dtFabricacao as 'Data de Fabricação do Sensor', 
+dtCompra as 'Data de compra', 
+dtManutencao as 'Data de manutenção do sensor',
+statusManutencao as "Status do sensor" from sensorLM35;
+
+SELECT
+idSilo as 'Identificação do Silo',
+idCliente as 'Identificação da Empresa',
+idSensor as 'Sensor',
+dtInstalacao as "Data de Instalação do Sensor" from silo;
