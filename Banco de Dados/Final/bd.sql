@@ -95,3 +95,29 @@ idSilo as 'Identificação do Silo',
 idCliente as 'Identificação da Empresa',
 idSensor as 'Sensor',
 dtInstalacao as "Data de Instalação do Sensor" from silo;
+
+SELECT 
+idTemperatura as "Identificação",
+idSensor as "Identificação do Sensor",
+idCliente as "Identificação do Cliente",
+CONCAT(temperatura,'°C') as 'Temperatura',
+CASE WHEN temperatura > 30 or temperatura < 20 
+THEN "ALERTA" 
+ELSE "Valor Ideal" END as Controle,
+dtRegistro as 'Data de Registro' from temperatura;
+
+INSERT INTO Cliente (razaoSocial, nomeFantasia, cnpj, email, senha, telefone, UF, rua, bairro, cidade, cep) VALUES
+('Empresa ABC Ltda', 'ABC Soluções', '12345678000195', 'cliente1@gmail.com', 'Senha123!', '119876543210', 'SP', 'Av. Paulista, 1000', 'Centro', 'São Paulo', 12345678),
+('Tech Innovators S.A.', 'TechIn', '98765432000167', 'cliente2@hotmail.com', 'Segura@2024', '219876543210', 'RJ', 'Rua das Inovações, 500', 'Botafogo', 'Rio de Janeiro', 22250040),
+('AgroMais Comércio Ltda', 'AgroMais', '11223344000188', 'cliente3@outlook.com', 'Agro@1234', '619876543210', 'DF', 'SQN 202 Bloco A', 'Asa Norte', 'Brasília', 70832000),
+('EletroMax Indústria Ltda', 'EletroMax', '33445566000122', 'cliente4@gmail.com', 'Eletro@2024', '319876543210', 'MG', 'Rua dos Eletrônicos, 120', 'Savassi', 'Belo Horizonte', 30112000),
+('Construtora Forte S.A.', 'Forte Engenharia', '55667788000144', 'cliente5@hotmail.com', 'Forte@Eng123', '419876543210', 'BA', 'Av. Paralela, 8000', 'Pituba', 'Salvador', 41830000),
+('BioTech Solutions Ltda', 'BioTech', '66778899000155', 'cliente6@outlook.com', 'Bio@Tech321', '519876543210', 'RS', 'Rua das Inovações, 350', 'Moinhos de Vento', 'Porto Alegre', 90560000);
+
+INSERT INTO sensorLM35 (numSerie, dtFabricacao, dtCompra, statusManutencao, dtManutencao) VALUES
+('SN1234567890', '2024-01-10', '2024-02-15 10:30:00', 'Ativo', '2025-02-15 10:30:00'),
+('SN0987654321', '2023-12-05', '2024-02-20 11:45:00', 'Manutencao', '2025-02-20 11:45:00'),
+('SN5678901234', '2024-02-01', '2024-03-01 14:00:00', 'Inativo', '2025-03-01 14:00:00'),
+('SN1122334455', '2024-01-20', '2024-03-10 09:15:00', 'Ativo', '2025-03-10 09:15:00'),
+('SN5566778899', '2023-11-30', '2024-03-15 16:45:00', 'Manutencao', '2025-03-15 16:45:00'),
+('SN6677889900', '2024-02-10', '2024-03-20 08:00:00', 'Ativo', '2025-03-20 08:00:00');
