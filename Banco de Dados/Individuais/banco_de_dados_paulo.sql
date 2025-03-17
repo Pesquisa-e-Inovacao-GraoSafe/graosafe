@@ -98,6 +98,14 @@ SELECT * FROM sensor;
 SELECT * FROM temperatura;
 SELECT * FROM cliente;
 SELECT * FROM usuario;
+
+UPDATE sensor SET statusFuncionamento = "Inativo" WHERE idSensor = 3;
+
+DELETE FROM sensor WHERE idSensor = 6;
+
+ALTER TABLE sensor ADD CONSTRAINT checkStatusFuncionamento CHECK (statusFuncionamento IN ('Ativo', 'Inativo', 'Manutenção'));
+
+SELECT * FROM cliente ORDER BY razaoSocial ASC;
     
     
     
