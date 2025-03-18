@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> Calculadora Financeira - Grão Safe</h1> <br>
+    <h3> Calcule aqui a estimativa de perda de sua produção de grãos de soja por mal armazenamento:</h3> <br>
+
+    Digite o nome da sua Empresa:
+    <input type="text" id="input_nome"> <br> <br>
+
+    Digite a UF do estado onde se concentra sua produção:
+    <input type="text" id="input_uf" placeholder="UF do estado"> <br> <br>
+
+    Digite a quantidade de toneladas armazenado em seus silos:
+    <input type="text" id="input_toneladas" placeholder="Digite valores inteiros"> <br> <br>
+
+    Digite a cotação da saca de soja atual:
+    <input type="text" id="input_saca" placeholder="Digite valores inteiros"> <br> <br>
+
+    <button onclick="analisePerda()">Analise de Safra</button><br> <br>
+
+    
+    <div id="div_mensagem"></div>
+</body>
+</html>
+
+<script>
+
+function analisePerda() {
+    var nomeEmpresa = input_nome.value; // Nome da empresa informado pelo usuário
+    var uf = input_uf.value; // Unidade federativa (estado) onde a empresa está localizada
+    var qtdToneladas = Number(input_toneladas.value); // Quantidade total de toneladas de soja armazenadas
+    var valorSaca = Number(input_saca.value); // Valor de uma saca de soja em reais
+
+    var perda = 0.15; // Percentual de perda estimado devido ao armazenamento inadequado (15%)
+    var ganhoEmpresa = 0; // Variável para armazenar o ganho real da empresa após perda de 15%.
+    var ganhoTonelada = 0; // Variável para armazenar a receita bruta baseada na produção total antes das perdas.
+    var perdaReal = 0; // Valor real perdido devido ao armazenamento inadequado.
+    var perdaCorrigida = 0; // Valor da perda corrigida considerando a solução proposta.
+    var porcentagem = "15%"; // Representação textual da porcentagem de perda.
+
+    var ganhoPorTonelada = ((1000 / 60) * valorSaca); // Cálculo de Receita por tonelada de soja produzida, utilizando o peso e valor da saca para o cálculo, será utilizada na mensagem!
+    ganhoTotal = ((1000 / 60) * valorSaca) * qtdToneladas; // Cálculo da receita total antes das perdas, valor por tonelada multiplicado pela produção da empresa.
+   
+    perdaReal = (ganhoTotal * perda); // Cálculo da perda real com base no percentual de 15%.
+    ganhoEmpresa = ganhoTotal - perdaReal; // Cálculo da receita da empresa considerando a perda.
+
+    perdaCorrigida = (ganhoTotal * 0.075);  // Cálculo da perda corrigida considerando a estimativa proposta (redução para 7,5%)
+    var valorTotal = ganhoTotal - perdaCorrigida; // Cálculo da receita final após a redução da perda.
+
+    // Tranformando os valores dos cálculos em valores monetários no padrão brasileiro. 
+    valorSaca = valorSaca.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); //Garante que o número sempre tenha pelo menos 2 casas decimais e limita o número a no máximo 2 casas decimais.
+    ganhoPorTonelada = ganhoPorTonelada.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    ganhoEmpresa = ganhoEmpresa.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    perdaReal = perdaReal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    valorTotal = valorTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    
+
+    // Exibição da mensagem com os resultados calculados:
+    div_mensagem.innerHTML = ` A empresa ${nomeEmpresa} possui um total de ${qtdToneladas} toneladas de grãos de soja armazenadas em seus silos, e tem sua produção concentrada no estado de ${uf}. <br> 
+    A cotação da saca de grão de soja atual é R$${valorSaca}, dado que em média uma saca de soja pesa 60Kg, cada tonelada produzida gerará uma receita de R$${ganhoPorTonelada}. <br> <br>
+
+    A perda média de grãos por armazenamento inadequado, no Brasil, segundo a Companhia Nacional de Abastecimento (Conab/2023), é de ${porcentagem}. <br>
+
+    Com base nesses valores, a empresa ${nomeEmpresa} sofre uma perda estimada de R$${perdaReal} em sua produção. <br> <br>
+    Atualmente, a empresa ${nomeEmpresa} obtém uma receita líquida média de R$${ganhoEmpresa}, já considerando as perdas causadas pelo armazenamento inadequado. <br> <br>
+    
+    No entanto, com a nossa solução, estima-se uma redução dessa perda em até 50%. <br>
+    <b><i>Isso elevaria a receita média líquida da produção de R$${ganhoEmpresa}, para: R$${valorTotal}!</b></i>
+    `
+} 
+</script>
+
+
+<!-- Ver a "receita média", fazer a pontuação dos valores, ver a questão dos UF -->
