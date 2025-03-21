@@ -1,3 +1,4 @@
+drop database grupoPI;
 create database grupoPI;
 use grupoPI;
 
@@ -15,16 +16,17 @@ UF CHAR(2) NOT NULL,
 rua VARCHAR(100) NOT NULL,
 bairro VARCHAR(20) NOT NULL,
 cidade VARCHAR(50) NOT NULL,
-cep CHAR(8));
+cep CHAR(8) NOT NULL
+);
 
 CREATE TABLE sensorLM35(
-idSensor INT PRIMARY KEY AUTO_INCREMENT,
-numSerie VARCHAR(100) UNIQUE,
-dtFabricacao  DATETIME DEFAULT CURRENT_TIMESTAMP,
-dtCompra DATETIME,
-statusSensor VARCHAR(10) DEFAULT "Inativo",
-CONSTRAINT checkManutencao CHECK(statusSensor IN("Ativo","Inativo","Manutencao")),
-dtManutencao DATETIME
+idSensor INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+numSerie VARCHAR(100) UNIQUE NOT NULL,
+dtFabricacao  DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+dtCompra DATETIME NOT NULL,
+statusManutencao VARCHAR(10) DEFAULT "Inativo" NOT NULL,
+CONSTRAINT checkManutencao CHECK(statusManutencao IN("Ativo","Inativo","Manutencao")),
+dtManutencao DATETIME NOT NULL
 );
 
 CREATE TABLE silo(
@@ -38,7 +40,7 @@ CREATE TABLE temperatura(
     idSensor INT NOT NULL UNIQUE,
     idCliente INT NOT NULL,
     temperatura FLOAT(5,2) NOT NULL,
-    dtRegistro DATETIME DEFAULT CURRENT_TIMESTAMP
+    dtRegistro DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
 
 ALTER TABLE Cliente ADD CONSTRAINT checkTelefone CHECK (LENGTH(telefone) <= 14 and LENGTH(telefone) >= 12);
@@ -48,7 +50,7 @@ VALUES
 ('MGTech', 'Tech Solutions', 98765432000100, '2025-02-15', 'techsolutions@hotmail.com', 'senha456', 5511976543210, 'RJ', 'Rua B', 'Bairro Y', 'Rio de Janeiro', 87654321),
 ('Logitecnica', 'Logistica LTDA', 19283746500010, '2025-01-30', 'logistica.ltda@outlook.com', 'senha789', 5511965432109, 'MG', 'Rua C', 'Bairro Z', 'Belo Horizonte', 23456789);
 
-INSERT INTO sensorLM35 (numSerie, dtFabricacao, dtCompra, dtManutencao, statusSensor)
+INSERT INTO sensorLM35 (numSerie, dtFabricacao, dtCompra, dtManutencao, statusManutencao)
 VALUES
 ('9AKREG935G9', '2023-06-10', '2024-07-15 10:00:00', '2025-03-05 14:30:00', 'Ativo'),
 ('SAF4290KF29', '2023-11-20', '2024-01-10 09:00:00', '2025-02-25 16:45:00', 'Inativo'),
@@ -80,6 +82,8 @@ bairro as "Bairro",
 cidade as "Cidade",
 cep as "CEP" FROM Cliente;
 
+select * from temperatura where temperatura >30 or temperatura<20;
+
 SELECT 
 idSensor as 'Identificação do Sensor',
 numSerie as 'Número de série',
@@ -103,6 +107,8 @@ CASE WHEN temperatura > 30 or temperatura < 20
 THEN "ALERTA" 
 ELSE "Valor Ideal" END as Controle,
 dtRegistro as 'Data de Registro' from temperatura;
+
+SELECT * FROM temperatura WHERE temperatura > 30 or temperatura < 20;
 
 INSERT INTO Cliente (razaoSocial, nomeFantasia, cnpj, email, senha, telefone, UF, rua, bairro, cidade, cep) VALUES
 ('Empresa ABC Ltda', 'ABC Soluções', '12345678000195', 'cliente1@gmail.com', 'Senha123!', '119876543210', 'SP', 'Av. Paulista, 1000', 'Centro', 'São Paulo', 12345678),
@@ -135,13 +141,9 @@ INSERT INTO silo (idSilo, idCliente, dtInstalacao, idSensor) VALUES
 INSERT INTO temperatura (idSensor, idCliente, temperatura, dtRegistro) VALUES
 (4, 4, 28, '2025-03-01 08:30:00'),
 (5, 5, 30, '2025-03-02 09:45:00'),
-(6, 6, 27, '2025-03-03 14:20:00'),
-(1, 1, 29, '2025-03-04 10:10:00'),
-(2, 2, 31, '2025-03-05 16:50:00'),
-(3, 3, 26, '2025-03-06 08:05:00');
+(6, 6, 27, '2025-03-03 14:20:00');
 
 INSERT INTO sensorLM35 (idSensor, numSerie, dtFabricacao, dtCompra, statusManutencao, dtManutencao) VALUES
 (6, 'SN5678901234', '2024-02-01', '2024-03-01 14:00:00', 'Inativo', '2025-03-01 14:00:00'),
 (7, 'SN1122334455', '2024-01-20', '2024-03-10 09:15:00', 'Ativo', '2025-03-10 09:15:00'),
 (8, 'SN5566778899', '2023-11-30', '2024-03-15 16:45:00', 'Manutencao', '2025-03-15 16:45:00');
-
