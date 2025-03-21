@@ -37,7 +37,7 @@ idSensor INT NOT NULL);
 
 CREATE TABLE temperatura(
 	idTemperatura INT PRIMARY KEY AUTO_INCREMENT,
-    idSensor INT NOT NULL UNIQUE,
+    idSensor INT NOT NULL,
     idCliente INT NOT NULL,
     temperatura FLOAT(5,2) NOT NULL,
     dtRegistro DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
@@ -90,7 +90,7 @@ numSerie as 'Número de série',
 dtFabricacao as 'Data de Fabricação do Sensor', 
 dtCompra as 'Data de compra', 
 dtManutencao as 'Data de manutenção do sensor',
-statusManutencao as "Status do sensor" from sensorLM35;
+statusSensor as "Status do sensor" from sensorLM35;
 
 SELECT
 idSilo as 'Identificação do Silo',
@@ -118,7 +118,7 @@ INSERT INTO Cliente (razaoSocial, nomeFantasia, cnpj, email, senha, telefone, UF
 ('Construtora Forte S.A.', 'Forte Engenharia', '55667788000144', 'cliente5@hotmail.com', 'Forte@Eng123', '419876543210', 'BA', 'Av. Paralela, 8000', 'Pituba', 'Salvador', 41830000),
 ('BioTech Solutions Ltda', 'BioTech', '66778899000155', 'cliente6@outlook.com', 'Bio@Tech321', '519876543210', 'RS', 'Rua das Inovações, 350', 'Moinhos de Vento', 'Porto Alegre', 90560000);
 
-INSERT INTO sensorLM35 (numSerie, dtFabricacao, dtCompra, statusManutencao, dtManutencao) VALUES
+INSERT INTO sensorLM35 (numSerie, dtFabricacao, dtCompra, statusSensor, dtManutencao) VALUES
 ('SN1234567890', '2024-01-10', '2024-02-15 10:30:00', 'Ativo', '2025-02-15 10:30:00'),
 ('SN0987654321', '2023-12-05', '2024-02-20 11:45:00', 'Manutencao', '2025-02-20 11:45:00'),
 ('SN5678901234', '2024-02-01', '2024-03-01 14:00:00', 'Inativo', '2025-03-01 14:00:00'),
@@ -128,7 +128,7 @@ INSERT INTO sensorLM35 (numSerie, dtFabricacao, dtCompra, statusManutencao, dtMa
 
 DELETE FROM sensorLM35 WHERE idSensor BETWEEN 6 AND 8;
 
-UPDATE sensorLM35 SET statusManutencao = "Ativo" WHERE idSensor = 5;
+UPDATE sensorLM35 SET statusSensor = "Ativo" WHERE idSensor = 5;
 
 INSERT INTO silo (idSilo, idCliente, dtInstalacao, idSensor) VALUES
 (4, 4, '2024-04-01 08:00:00', 4),
@@ -143,7 +143,7 @@ INSERT INTO temperatura (idSensor, idCliente, temperatura, dtRegistro) VALUES
 (5, 5, 30, '2025-03-02 09:45:00'),
 (6, 6, 27, '2025-03-03 14:20:00');
 
-INSERT INTO sensorLM35 (idSensor, numSerie, dtFabricacao, dtCompra, statusManutencao, dtManutencao) VALUES
+INSERT INTO sensorLM35 (idSensor, numSerie, dtFabricacao, dtCompra, statusSensor, dtManutencao) VALUES
 (6, 'SN5678901234', '2024-02-01', '2024-03-01 14:00:00', 'Inativo', '2025-03-01 14:00:00'),
 (7, 'SN1122334455', '2024-01-20', '2024-03-10 09:15:00', 'Ativo', '2025-03-10 09:15:00'),
 (8, 'SN5566778899', '2023-11-30', '2024-03-15 16:45:00', 'Manutencao', '2025-03-15 16:45:00');
